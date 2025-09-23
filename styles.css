@@ -1,0 +1,571 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #667eea;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo i {
+    font-size: 2.5em;
+    color: #667eea;
+}
+
+.logo h1 {
+    color: #333;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav a:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    min-height: calc(100vh - 200px);
+    padding: 40px 0;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Portal Section */
+.portal-section {
+    display: flex;
+    justify-content: center;
+}
+
+.portal-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    padding: 50px;
+    max-width: 1000px;
+    width: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Search Section */
+.search-section {
+    margin-bottom: 40px;
+}
+
+.input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    flex: 1;
+    padding: 18px 25px;
+    border: 2px solid #e0e6ed;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.input-field:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.search-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+
+.search-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Loading */
+.loading {
+    display: none;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Messages */
+.error-message, .success-message {
+    display: none;
+    padding: 18px 25px;
+    border-radius: 12px;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.error-message {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+    color: white;
+    border-left: 5px solid #d63031;
+}
+
+.success-message {
+    background: linear-gradient(135deg, #51cf66, #40c057);
+    color: white;
+    border-left: 5px solid #00b894;
+}
+
+/* ID Card */
+.id-card {
+    display: none;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    padding: 0;
+    margin-top: 40px;
+    border: 3px solid #667eea;
+    overflow: hidden;
+}
+
+.id-card-header {
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    position: relative;
+}
+
+.id-card-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #764ba2;
+}
+
+.id-card-header h3 {
+    font-size: 1.8em;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.id-card-header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.id-card-body {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 40px;
+    padding: 40px;
+    align-items: start;
+}
+
+/* Student Photo */
+.student-photo {
+    text-align: center;
+}
+
+.photo-placeholder, .photo-img {
+    width: 200px;
+    height: 250px;
+    border-radius: 15px;
+    border: 3px solid #e0e6ed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    color: #6c757d;
+    font-size: 16px;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.photo-placeholder i {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: #adb5bd;
+}
+
+.photo-img {
+    object-fit: cover;
+    display: none;
+}
+
+/* Student Details */
+.student-details {
+    display: grid;
+    gap: 20px;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 2px solid #f1f3f4;
+    transition: all 0.3s ease;
+}
+
+.detail-row:hover {
+    background: rgba(102, 126, 234, 0.05);
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.detail-value {
+    color: #212529;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* ID Card Footer */
+.id-card-footer {
+    padding: 30px 40px;
+    background: linear-gradient(135deg, #f8f9ff, #ffffff);
+    border-top: 2px solid #e9ecef;
+}
+
+.print-btn-container {
+    text-align: center;
+}
+
+.print-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    margin-top: 80px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 60px 0 40px;
+}
+
+.footer-section h4 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #667eea;
+    font-weight: 700;
+}
+
+.footer-section p {
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #667eea;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.contact-info i {
+    color: #667eea;
+    width: 20px;
+}
+
+.footer-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    margin: 40px 0 30px;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.bot-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.bot-link:hover {
+    color: #5a6fd8;
+}
+
+/* Print Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .id-card, .id-card * {
+        visibility: visible;
+    }
+    .id-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .print-btn {
+        display: none !important;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .nav ul {
+        gap: 15px;
+    }
+    
+    .hero-content h2 {
+        font-size: 2.2em;
+    }
+    
+    .portal-card {
+        padding: 30px 20px;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .id-card-body {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .detail-row {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h2 {
+        font-size: 1.8em;
+    }
+    
+    .logo h1 {
+        font-size: 1.4em;
+    }
+    
+    .portal-card {
+        padding: 20px 15px;
+    }
+    
+    .photo-placeholder, .photo-img {
+        width: 150px;
+        height: 180px;
+    }
+}
