@@ -6,7 +6,7 @@
 
 class StudentPortal {
     constructor() {
-        this.serverUrl = window.location.origin; // Use same origin as frontend
+        this.serverUrl = 'https://tit-student-server.onrender.com'; // Use same origin as frontend
         this.initializeElements();
         this.bindEvents();
         this.initializeApp();
