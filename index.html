@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Technocrats Institute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Secure access to Technocrats Institute Student Portal">
+    <meta name="author" content="Stranger Bot">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; animation-duration: 8s; }
+        .shape-2 { width: 120px; height: 120px; top: 20%; right: 10%; animation-delay: 1s; animation-duration: 10s; }
+        .shape-3 { width: 60px; height: 60px; bottom: 30%; left: 20%; animation-delay: 2s; animation-duration: 7s; }
+        .shape-4 { width: 100px; height: 100px; bottom: 10%; right: 20%; animation-delay: 3s; animation-duration: 9s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Auth Screen Styles */
+        .auth-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .logo i {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            padding: 0;
+            max-width: 500px;
+            width: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 25px solid #764ba2;
+        }
+
+        .security-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 50px 40px 40px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 20px;
+            color: #667eea;
+            font-size: 1.2em;
+            z-index: 2;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 18px 20px 18px 60px;
+            border: 2px solid #e0e6ed;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-group input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 1.1em;
+            padding: 5px;
+            transition: color 0.3s ease;
+            z-index: 2;
+        }
+
+        .toggle-password:hover {
+            color: #5a6fd8;
+        }
+
+        .login-btn {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Portal Screen Styles */
+        .portal-screen {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .portal-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .portal-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .portal-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .portal-logo i {
+            font-size: 2.5em;
+            color: #667eea;
+        }
+
+        .portal-logo h1 {
+            color: #333;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-content h2 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .portal-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            padding: 50px;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .search-section {
+            margin-bottom: 40px;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 18px 25px;
+            border: 2px solid #e0e6ed;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-field:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Loading, Messages and ID Card styles */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message, .success-message {
+            display: none;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            border-left: 5px solid #d63031;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #51cf66, #40c057);
+            color: white;
+            border-left: 5px solid #00b894;
+        }
+
+        .id-card {
+            display: none;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            margin-top: 40px;
+            border: 3px solid #667eea;
+            overflow: hidden;
+        }
+
+        .id-card-header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            position: relative;
+        }
+
+        .id-card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #764ba2;
+        }
+
+        .id-card-header h3 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .id-card-body {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 40px;
+            align-items: start;
+        }
+
+        .student-photo {
+            text-align: center;
+        }
+
+        .photo-placeholder, .photo-img {
+            width: 200px;
+            height: 250px;
+            border-radius: 15px;
+            border: 3px solid #e0e6ed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #6c757d;
+            font-size: 16px;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-placeholder i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #adb5bd;
+        }
+
+        .photo-img {
+            object-fit: cover;
+            display: none;
+        }
+
+        .student-details {
+            display: grid;
+            gap: 20px;
+        }
+
+        .detail-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 2px solid #f1f3f4;
+            transition: all 0.3s ease;
+        }
+
+        .detail-row:hover {
+            background: rgba(102, 126, 234, 0.05);
+            padding-left: 10px;
+            border-radius: 10px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-value {
+            color: #212529;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .print-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        }
+
+        /* Alert Messages */
+        .alert-container {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .alert {
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateX(450px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .alert.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .alert.error {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            border-left: 5px solid #a71e2a;
+        }
+
+        .alert.success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-left: 5px solid #1e7e34;
+        }
+
+        .alert.warning {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+            color: #333;
+            border-left: 5px solid #d39e00;
+        }
+
+        .alert.info {
+            background: linear-gradient(135deg, #17a2b8, #007bff);
+            color: white;
+            border-left: 5px solid #117a8b;
+        }
+
+        .alert i {
+            font-size: 1.5em;
+            min-width: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                position: relative;
+                top: 0;
+                transform: none;
+                margin-bottom: 40px;
+            }
+            
+            .logo h1 {
+                font-size: 2em;
+            }
+            
+            .auth-card {
+                max-width: 100%;
+            }
+            
+            .card-body {
+                padding: 40px 25px 30px;
+            }
+            
+            .portal-card {
+                padding: 30px 20px;
+            }
+            
+            .search-input-group {
+                flex-direction: column;
+            }
+            
+            .id-card-body {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .detail-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.8em;
+            }
+            
+            .card-header {
+                padding: 30px 20px 25px;
+            }
+            
+            .card-body {
+                padding: 30px 20px 25px;
+            }
+            
+            .portal-card {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+    </div>
+
+    <!-- Authentication Screen -->
+    <div class="auth-screen" id="authScreen">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Technocrats Institute</h1>
+            </div>
+        </div>
+
+        <div class="auth-card">
+            <div class="card-header">
+                <i class="fas fa-shield-alt security-icon"></i>
+                <h2>Student Portal Access</h2>
+                <p>Enter password to access student information system</p>
+            </div>
+
+            <div class="card-body">
+                <form id="portalLoginForm" class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="portalPassword" placeholder="Enter Portal Password" required>
+                        <button type="button" class="toggle-password" id="togglePortalPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Access Portal
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portal Screen -->
+    <div class="portal-screen" id="portalScreen">
+        <!-- Header -->
+        <header class="portal-header">
+            <div class="container">
+                <div class="portal-header-content">
+                    <div class="portal-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h1>Technocrats Institute</h1>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="hero-section">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2>Student Info Portal</h2>
+                        <p>Enter your enrollment number to view student details</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="portal-section">
+                <div class="container">
+                    <div class="portal-card">
+                        <div class="search-section">
+                            <div class="search-input-group">
+                                <input type="text" id="enrollmentInput" class="input-field" 
+                                       placeholder="Enter enrollment number (e.g., 0111AL241136)" 
+                                       maxlength="20">
+                                <button id="searchBtn" class="search-btn">
+                                    <i class="fas fa-search"></i>
+                                    Get Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="loading" class="loading">
+                            <div class="spinner"></div>
+                            <p>Fetching student details...</p>
+                        </div>
+
+                        <div id="errorMessage" class="error-message"></div>
+                        <div id="successMessage" class="success-message"></div>
+
+                        <div id="idCard" class="id-card">
+                            <div class="id-card-header">
+                                <h3>Technocrats Institute of Technology</h3>
+                                <p>Student Info</p>
+                            </div>
+                            
+                            <div class="id-card-body">
+                                <div class="student-photo">
+                                    <div id="photoPlaceholder" class="photo-placeholder">
+                                        <i class="fas fa-camera"></i>
+                                        <span>Student Photo</span>
+                                    </div>
+                                    <img id="studentPhoto" class="photo-img" alt="Student Photo">
+                                </div>
+                                
+                                <div class="student-details" id="studentDetails">
+                                    <!-- Details will be populated here -->
+                                </div>
+                            </div>
+
+                            <div style="text-align: center; padding: 30px;">
+                                <button id="printBtn" class="print-btn">
+                                    <i class="fas fa-print"></i>
+                                    Print ID Card
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 Technocrats Institute of Technology. All rights reserved.</p>
+                <p>Created by <strong>Stranger Bot</strong></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="alertContainer" class="alert-container"></div>
+
+    <script>
+        /**
+         * Combined Student Portal Application
+         * Created by Stranger Bot
+         * Authentication + Portal functionality in single page
+         */
+
+        class CombinedPortal {
+            constructor() {
+                // Use your render server URL here
+                this.serverUrl = 'https://your-server-name.onrender.com';
+                this.isAuthenticated = false;
+                this.sessionTimeout = 30 * 60 * 1000; // 30 minutes
+                this.sessionTimer = null;
+                
+                this.initializeElements();
+                this.bindEvents();
+                this.initializeApp();
+            }
+
+            initializeElements() {
+                // Screens
+                this.authScreen = document.getElementById('authScreen');
+                this.portalScreen = document.getElementById('portalScreen');
+                
+                // Auth elements
+                this.portalLoginForm = document.getElementById('portalLoginForm');
+                this.portalPasswordInput = document.getElementById('portalPassword');
+                this.togglePortalPassword = document.getElementById('togglePortalPassword');
+                this.loginBtn = document.getElementById('loginBtn');
+                
+                // Portal elements
+                this.enrollmentInput = document.getElementById('enrollmentInput');
+                this.searchBtn = document.getElementById('searchBtn');
+                this.logoutBtn = document.getElementById('logoutBtn');
+                
+                // UI elements
+                this.loading = document.getElementById('loading');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.successMessage = document.getElementById('successMessage');
+                this.idCard = document.getElementById('idCard');
+                this.studentDetails = document.getElementById('studentDetails');
+                this.photoPlaceholder = document.getElementById('photoPlaceholder');
+                this.studentPhoto = document.getElementById('studentPhoto');
+                this.printBtn = document.getElementById('printBtn');
+                this.alertContainer = document.getElementById('alertContainer');
+            }
+
+            bindEvents() {
+                // Auth events
+                this.portalLoginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleAuthentication();
+                });
+
+                this.togglePortalPassword.addEventListener('click', () => {
+                    this.togglePasswordVisibility(this.portalPasswordInput, this.togglePortalPassword);
+                });
+
+                this.logoutBtn.addEventListener('click', () => {
+                    this.handleLogout();
+                });
+
+                // Portal events
+                this.searchBtn.addEventListener('click', () => this.searchStudent());
+                
+                this.enrollmentInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.searchStudent();
+                    }
+                });
+
+                this.enrollmentInput.addEventListener('input', (e) => {
+                    let value = e.target.value.toUpperCase();
+                    e.target.value = value;
+                });
+
+                this.printBtn.addEventListener('click', () => this.printIdCard());
+
+                // Check authentication on page load/refresh
+                window.addEventListener('beforeunload', () => {
+                    if (this.sessionTimer) {
+                        clearTimeout(this.sessionTimer);
+                    }
+                });
+
+                // Handle visibility change (tab switching)
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'visible' && this.isAuthenticated) {
+                        this.resetSessionTimer();
+                    }
+                });
+            }
+
+            initializeApp() {
+                console.log('🚀 Combined Portal initialized');
+                console.log('🔐 Created by Stranger Bot');
+                
+                this.addWelcomeAnimation();
+                this.checkAuthenticationState();
+            }
+
+            addWelcomeAnimation() {
+                const authCard = document.querySelector('.auth-card');
+                if (authCard) {
+                    authCard.style.opacity = '0';
+                    authCard.style.transform = 'translateY(50px)';
+                    
+                    setTimeout(() => {
+                        authCard.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                        authCard.style.opacity = '1';
+                        authCard.style.transform = 'translateY(0)';
+                    }, 300);
+                }
+            }
+
+            checkAuthenticationState() {
+                // Check if user was previously authenticated (for refresh protection)
+                const authState = sessionStorage.getItem('portalAuth');
+                if (authState) {
+                    const { timestamp, authenticated } = JSON.parse(authState);
+                    const now = Date.now();
+                    
+                    if (authenticated && (now - timestamp < this.sessionTimeout)) {
+                        this.isAuthenticated = true;
+                        this.showPortal();
+                        this.resetSessionTimer();
+                        this.showAlert('Session restored. Welcome back!', 'info');
+                    } else {
+                        this.clearAuthState();
+                    }
+                }
+            }
+
+            async handleAuthentication() {
+                const password = this.portalPasswordInput.value.trim();
+                
+                if (!password) {
+                    this.showAlert('Please enter the portal password', 'warning');
+                    this.focusInput(this.portalPasswordInput);
+                    return;
+                }
+
+                this.setLoadingState(true);
+
+                try {
+                    const isValid = await this.validatePassword(password);
+                    
+                    if (isValid) {
+                        this.isAuthenticated = true;
+                        this.saveAuthState();
+                        this.showAlert('Access granted! Welcome to the portal.', 'success');
+                        
+                        setTimeout(() => {
+                            this.showPortal();
+                            this.resetSessionTimer();
+                        }, 1500);
+                    } else {
+                        this.showAlert('Invalid portal password. Please try again.', 'error');
+                        this.portalPasswordInput.value = '';
+                        this.focusInput(this.portalPasswordInput);
+                    }
+                } catch (error) {
+                    console.error('Authentication error:', error);
+                    this.showAlert('Authentication failed. Please check your connection and try again.', 'error');
+                } finally {
+                    this.setLoadingState(false);
+                }
+            }
+
+            async validatePassword(password) {
+                try {
+                    const response = await fetch(`${this.serverUrl}/api/validate-password`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ password: password })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data.valid === true;
+                } catch (error) {
+                    console.error('Password validation error:', error);
+                    throw error;
+                }
+            }
+
+            saveAuthState() {
+                const authState = {
+                    authenticated: true,
+                    timestamp: Date.now()
+                };
+                sessionStorage.setItem('portalAuth', JSON.stringify(authState));
+            }
+
+            clearAuthState() {
+                sessionStorage.removeItem('portalAuth');
+                this.isAuthenticated = false;
+            }
+
+            resetSessionTimer() {
+                if (this.sessionTimer) {
+                    clearTimeout(this.sessionTimer);
+                }
+                
+                this.sessionTimer = setTimeout(() => {
+                    this.handleSessionTimeout();
+                }, this.sessionTimeout);
+            }
+
+            handleSessionTimeout() {
+                this.showAlert('Session expired. Please login again.', 'warning');
+                this.handleLogout();
+            }
+
+            handleLogout() {
+                this.clearAuthState();
+                if (this.sessionTimer) {
+                    clearTimeout(this.sessionTimer);
+                }
+                
+                this.showAlert('Logged out successfully', 'info');
+                this.showAuth();
+                this.clearAllForms();
+            }
+
+            showPortal() {
+                this.authScreen.style.display = 'none';
+                this.portalScreen.style.display = 'block';
+                
+                // Focus on enrollment input
+                setTimeout(() => {
+                    this.focusInput(this.enrollmentInput);
+                }, 300);
+            }
+
+            showAuth() {
+                this.portalScreen.style.display = 'none';
+                this.authScreen.style.display = 'flex';
+                
+                // Reset portal state
+                this.hideIdCard();
+                this.hideMessages();
+                
+                setTimeout(() => {
+                    this.focusInput(this.portalPasswordInput);
+                }, 300);
+            }
+
+            async searchStudent() {
+                if (!this.isAuthenticated) {
+                    this.showAlert('Please login first', 'error');
+                    this.showAuth();
+                    return;
+                }
+
+                const enrollmentNo = this.enrollmentInput.value.trim();
+                
+                if (!enrollmentNo) {
+                    this.showAlert('Please enter an enrollment number', 'warning');
+                    this.focusInput(this.enrollmentInput);
+                    return;
+                }
+
+                if (!this.validateEnrollmentNumber(enrollmentNo)) {
+                    this.showAlert('Please enter a valid enrollment number format', 'warning');
+                    this.focusInput(this.enrollmentInput);
+                    return;
+                }
+
+                this.showLoading(true);
+                this.hideMessages();
+                this.hideIdCard();
+
+                try {
+                    console.log(`🔍 Searching for student: ${enrollmentNo}`);
+                    const studentData = await this.fetchStudentData(enrollmentNo);
+                    
+                    if (studentData && studentData.success) {
+                        console.log('✅ Student data retrieved successfully');
+                        this.displayStudentCard(studentData.data);
+                        this.showSuccess('Student details retrieved successfully!');
+                        this.resetSessionTimer(); // Reset timer on activity
+                    } else {
+                        console.log('❌ No student found');
+                        this.showError(studentData.message || 'No student found with this enrollment number');
+                    }
+                } catch (error) {
+                    console.error('❌ Error fetching student data:', error);
+                    this.showError('Failed to fetch student details. Please check your connection and try again.');
+                } finally {
+                    this.showLoading(false);
+                }
+            }
+
+            validateEnrollmentNumber(enrollmentNo) {
+                const isValidLength = enrollmentNo.length >= 5 && enrollmentNo.length <= 20;
+                const hasValidCharacters = /^[A-Z0-9\-]+$/i.test(enrollmentNo);
+                return isValidLength && hasValidCharacters;
+            }
+
+            async fetchStudentData(enrollmentNo) {
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        enrollmentNo: enrollmentNo
+                    })
+                };
+
+                console.log('📡 Making API request to:', `${this.serverUrl}/api/student`);
+                
+                const response = await fetch(`${this.serverUrl}/api/student`, requestOptions);
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+                }
+
+                return await response.json();
+            }
+
+            displayStudentCard(data) {
+                if (!data || !data.StudentID) {
+                    this.showError('Invalid student data received from server');
+                    return;
+                }
+
+                console.log('🎓 Displaying student card for:', data.Name);
+
+                this.handleStudentPhoto(data);
+                this.studentDetails.innerHTML = '';
+
+                const fields = this.getStudentFields(data);
+                this.createDetailRows(fields);
+                this.showIdCard();
+            }
+
+            handleStudentPhoto(data) {
+                if (data.imageFolderPath && data.imageFolderPath !== '') {
+                    const testImage = new Image();
+                    
+                    testImage.onload = () => {
+                        this.studentPhoto.src = data.imageFolderPath;
+                        this.studentPhoto.alt = `Photo of ${data.Name}`;
+                        this.studentPhoto.style.display = 'block';
+                        this.photoPlaceholder.style.display = 'none';
+                        console.log('📷 Student photo loaded successfully');
+                    };
+                    
+                    testImage.onerror = () => {
+                        console.warn('⚠️ Failed to load student photo');
+                        this.showPhotoPlaceholder();
+                    };
+                    
+                    testImage.src = data.imageFolderPath;
+                } else {
+                    this.showPhotoPlaceholder();
+                }
+            }
+
+            showPhotoPlaceholder() {
+                this.studentPhoto.style.display = 'none';
+                this.photoPlaceholder.style.display = 'flex';
+                this.photoPlaceholder.innerHTML = `
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Photo Not Available</span>
+                `;
+                console.log('📷 Using photo placeholder');
+            }
+
+            getStudentFields(data) {
+                const fields = [
+                    { label: 'Student ID', value: data.StudentID || 'N/A', icon: 'fas fa-id-badge' },
+                    { label: 'Student Name', value: data.Name || 'N/A', icon: 'fas fa-user' },
+                    { label: 'Enrollment No', value: data.Enrollmentno || 'N/A', icon: 'fas fa-hashtag' },
+                    { label: 'College Name', value: data.CollegeName || 'N/A', icon: 'fas fa-university' },
+                    { label: 'Course', value: data.CourseName || 'N/A', icon: 'fas fa-graduation-cap' },
+                    { label: 'Branch', value: data.BranchName || 'N/A', icon: 'fas fa-code-branch' },
+                    { label: 'Mobile Number', value: data.MobileNo || 'N/A', icon: 'fas fa-phone' }
+                ];
+
+                // Add optional fields if available
+                if (data.FatherName) {
+                    fields.push({ label: 'Father\'s Name', value: data.FatherName, icon: 'fas fa-male' });
+                }
+                if (data.Address) {
+                    fields.push({ label: 'Address', value: data.Address, icon: 'fas fa-map-marker-alt' });
+                }
+                if (data.Blood) {
+                    fields.push({ label: 'Blood Group', value: data.Blood, icon: 'fas fa-tint' });
+                }
+
+                return fields;
+            }
+
+            createDetailRows(fields) {
+                fields.forEach((field, index) => {
+                    const row = document.createElement('div');
+                    row.className = 'detail-row';
+                    row.style.opacity = '0';
+                    row.style.transform = 'translateX(-20px)';
+                    
+                    row.innerHTML = `
+                        <div class="detail-label">
+                            <i class="${field.icon || 'fas fa-info-circle'}"></i>
+                            ${field.label}:
+                        </div>
+                        <div class="detail-value">${field.value}</div>
+                    `;
+                    
+                    this.studentDetails.appendChild(row);
+                    
+                    setTimeout(() => {
+                        row.style.transition = 'all 0.5s ease-out';
+                        row.style.opacity = '1';
+                        row.style.transform = 'translateX(0)';
+                    }, index * 100 + 300);
+                });
+            }
+
+            printIdCard() {
+                console.log('🖨️ Printing ID card...');
+                
+                const printStyles = `
+                    <style media="print">
+                        @page { size: A4; margin: 0.5in; }
+                        .id-card { box-shadow: none !important; border: 2px solid #000 !important; }
+                        .print-btn { display: none !important; }
+                        .portal-header, .footer, .search-section { display: none !important; }
+                        .loading, .error-message, .success-message { display: none !important; }
+                    </style>
+                `;
+                
+                const head = document.getElementsByTagName('head')[0];
+                const printStyleSheet = document.createElement('div');
+                printStyleSheet.innerHTML = printStyles;
+                head.appendChild(printStyleSheet);
+                
+                window.print();
+                
+                setTimeout(() => {
+                    head.removeChild(printStyleSheet);
+                }, 1000);
+            }
+
+            // UI Helper Methods
+            togglePasswordVisibility(input, toggleButton) {
+                const icon = toggleButton.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+
+            setLoadingState(loading) {
+                this.loginBtn.disabled = loading;
+                if (loading) {
+                    this.loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+                } else {
+                    this.loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Access Portal';
+                }
+            }
+
+            showLoading(show) {
+                this.loading.style.display = show ? 'block' : 'none';
+                this.searchBtn.disabled = show;
+                
+                if (show) {
+                    this.searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+                } else {
+                    this.searchBtn.innerHTML = '<i class="fas fa-search"></i> Get Details';
+                }
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
+                this.successMessage.style.display = 'none';
+                setTimeout(() => this.hideMessages(), 5000);
+            }
+
+            showSuccess(message) {
+                this.successMessage.textContent = message;
+                this.successMessage.style.display = 'block';
+                this.errorMessage.style.display = 'none';
+                setTimeout(() => this.hideMessages(), 5000);
+            }
+
+            hideMessages() {
+                this.errorMessage.style.display = 'none';
+                this.successMessage.style.display = 'none';
+            }
+
+            showIdCard() {
+                this.idCard.style.display = 'block';
+                this.idCard.style.opacity = '0';
+                this.idCard.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    this.idCard.style.transition = 'all 0.8s ease-out';
+                    this.idCard.style.opacity = '1';
+                    this.idCard.style.transform = 'translateY(0)';
+                    this.idCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+
+            hideIdCard() {
+                this.idCard.style.display = 'none';
+            }
+
+            focusInput(input) {
+                setTimeout(() => {
+                    input.focus();
+                    input.select();
+                }, 100);
+            }
+
+            clearAllForms() {
+                const forms = document.querySelectorAll('form');
+                forms.forEach(form => form.reset());
+                this.hideIdCard();
+                this.hideMessages();
+            }
+
+            showAlert(message, type = 'info') {
+                const alertId = 'alert_' + Date.now();
+                const icons = {
+                    success: 'fas fa-check-circle',
+                    error: 'fas fa-exclamation-circle',
+                    warning: 'fas fa-exclamation-triangle',
+                    info: 'fas fa-info-circle'
+                };
+                
+                const alert = document.createElement('div');
+                alert.className = `alert ${type}`;
+                alert.id = alertId;
+                alert.innerHTML = `
+                    <i class="${icons[type]}"></i>
+                    <span>${message}</span>
+                `;
+                
+                this.alertContainer.appendChild(alert);
+                
+                setTimeout(() => alert.classList.add('show'), 100);
+                setTimeout(() => this.hideAlert(alertId), 5000);
+            }
+
+            hideAlert(alertId) {
+                const alert = document.getElementById(alertId);
+                if (alert) {
+                    alert.classList.remove('show');
+                    setTimeout(() => {
+                        if (alert.parentNode) {
+                            alert.parentNode.removeChild(alert);
+                        }
+                    }, 500);
+                }
+            }
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🎓 Loading Combined Student Portal...');
+            console.log('🔐 Created by Stranger Bot');
+            
+            const portal = new CombinedPortal();
+            window.CombinedPortal = portal;
+            
+            console.log('✅ Combined Portal loaded successfully!');
+        });
+
+        // Global error handler
+        window.addEventListener('error', (event) => {
+            console.error('🚨 Global error:', event.error);
+        });
+    </script>
+</body>
+</html>
