@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Access Control</title>
+    <link rel="stylesheet" href="front-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Secure access to Technocrats Institute Student Portal">
+    <meta name="keywords" content="student portal, technocrats, secure access">
+    <meta name="author" content="Stranger Bot">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+            <div class="shape shape-6"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Technocrats Institute</h1>
+            </div>
+        </div>
+
+        <!-- Main Authentication Card -->
+        <div class="auth-card" id="mainCard">
+            <div class="card-header">
+                <i class="fas fa-shield-alt security-icon"></i>
+                <h2>Student Portal Access</h2>
+                <p>Enter password to access student information system</p>
+            </div>
+
+            <div class="card-body">
+                <form id="portalLoginForm" class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="portalPassword" placeholder="Enter Portal Password" required>
+                        <button type="button" class="toggle-password" id="togglePortalPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="login-btn primary-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Access Portal
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <button id="developerLoginBtn" class="developer-btn">
+                    <i class="fas fa-code"></i>
+                    Developer Login
+                </button>
+            </div>
+        </div>
+
+        <!-- Developer Login Card -->
+        <div class="auth-card developer-card" id="developerCard">
+            <div class="card-header">
+                <i class="fas fa-user-cog dev-icon"></i>
+                <h2>Developer Access</h2>
+                <p>Administrative access for system configuration</p>
+            </div>
+
+            <div class="card-body">
+                <form id="developerLoginForm" class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="developerUsername" placeholder="Developer Username" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="developerPassword" placeholder="Developer Password" required>
+                        <button type="button" class="toggle-password" id="toggleDeveloperPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="login-btn primary-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login
+                        </button>
+                        <button type="button" id="backToMainBtn" class="login-btn secondary-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Developer Dashboard -->
+        <div class="auth-card dashboard-card" id="developerDashboard">
+            <div class="card-header">
+                <i class="fas fa-cogs dashboard-icon"></i>
+                <h2>Developer Dashboard</h2>
+                <p>System Configuration & Password Management</p>
+            </div>
+
+            <div class="card-body">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3>Portal Access</h3>
+                            <p>Manage user access</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="stat-info">
+                            <h3>Security</h3>
+                            <p>Password controls</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3><i class="fas fa-wrench"></i> Password Management</h3>
+                    
+                    <div class="config-item">
+                        <form id="changePortalPasswordForm" class="config-form">
+                            <h4>Change Portal Password</h4>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="newPortalPassword" placeholder="New Portal Password" required minlength="6">
+                                <button type="button" class="toggle-password" id="toggleNewPortalPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="confirmPortalPassword" placeholder="Confirm Portal Password" required>
+                            </div>
+                            <button type="submit" class="config-btn">
+                                <i class="fas fa-save"></i>
+                                Update Portal Password
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="config-item">
+                        <form id="changeDeveloperPasswordForm" class="config-form">
+                            <h4>Change Developer Password</h4>
+                            <div class="input-group">
+                                <i class="fas fa-key"></i>
+                                <input type="password" id="currentDeveloperPassword" placeholder="Current Developer Password" required>
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-key"></i>
+                                <input type="password" id="newDeveloperPassword" placeholder="New Developer Password" required minlength="6">
+                                <button type="button" class="toggle-password" id="toggleNewDeveloperPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-key"></i>
+                                <input type="password" id="confirmDeveloperPassword" placeholder="Confirm Developer Password" required>
+                            </div>
+                            <button type="submit" class="config-btn">
+                                <i class="fas fa-save"></i>
+                                Update Developer Password
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="dashboard-actions">
+                    <button id="accessPortalBtn" class="action-btn primary-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Access Portal
+                    </button>
+                    <button id="logoutBtn" class="action-btn secondary-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Messages -->
+        <div id="alertContainer" class="alert-container"></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 Technocrats Institute of Technology</p>
+            <p>Created by <strong>Stranger Bot</strong></p>
+        </div>
+    </div>
+
+    <script src="front-script.js"></script>
+</body>
+</html>
