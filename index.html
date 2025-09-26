@@ -731,7 +731,8 @@
             </div>
         </div>
 
-        <div class="auth-card">
+        <!-- Main Login Card -->
+        <div class="auth-card" id="mainCard">
             <div class="card-header">
                 <i class="fas fa-shield-alt security-icon"></i>
                 <h2>Student Portal Access</h2>
@@ -752,6 +753,115 @@
                         Access Portal
                     </button>
                 </form>
+
+                <div style="position: relative; text-align: center; margin: 30px 0;">
+                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #e0e6ed, transparent);"></div>
+                    <span style="background: rgba(255, 255, 255, 0.95); padding: 0 20px; color: #6c757d; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;">or</span>
+                </div>
+
+                <button id="developerLoginBtn" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 18px 35px; border-radius: 15px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;">
+                    <i class="fas fa-code"></i>
+                    Developer Login
+                </button>
+            </div>
+        </div>
+
+        <!-- Developer Login Card -->
+        <div class="auth-card" id="developerCard" style="display: none;">
+            <div class="card-header">
+                <i class="fas fa-user-cog security-icon"></i>
+                <h2>Developer Access</h2>
+                <p>Administrative access for system configuration</p>
+            </div>
+
+            <div class="card-body">
+                <form id="developerLoginForm" class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="developerUsername" placeholder="Developer Username" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="developerPassword" placeholder="Developer Password" required>
+                        <button type="button" class="toggle-password" id="toggleDeveloperPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <button type="submit" class="login-btn" id="devLoginBtn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login
+                        </button>
+                        <button type="button" id="backToMainBtn" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; border: none; padding: 18px 35px; border-radius: 15px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Developer Dashboard Card -->
+        <div class="auth-card" id="developerDashboard" style="display: none; max-width: 800px;">
+            <div class="card-header">
+                <i class="fas fa-cogs security-icon"></i>
+                <h2>Developer Dashboard</h2>
+                <p>System Configuration & Password Management</p>
+            </div>
+
+            <div class="card-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px;">
+                    <div style="background: linear-gradient(135deg, #f8f9ff, #ffffff); border: 2px solid #e0e6ed; border-radius: 15px; padding: 30px; display: flex; align-items: center; gap: 20px;">
+                        <i class="fas fa-users" style="font-size: 2.5em; color: #667eea;"></i>
+                        <div>
+                            <h3 style="font-size: 1.3em; color: #333; margin-bottom: 5px;">Portal Access</h3>
+                            <p style="color: #6c757d; font-size: 0.9em;">Manage user access</p>
+                        </div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f8f9ff, #ffffff); border: 2px solid #e0e6ed; border-radius: 15px; padding: 30px; display: flex; align-items: center; gap: 20px;">
+                        <i class="fas fa-shield-alt" style="font-size: 2.5em; color: #667eea;"></i>
+                        <div>
+                            <h3 style="font-size: 1.3em; color: #333; margin-bottom: 5px;">Security</h3>
+                            <p style="color: #6c757d; font-size: 0.9em;">Password controls</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <h3 style="font-size: 1.5em; color: #333; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-wrench" style="color: #667eea;"></i> Password Management</h3>
+                    
+                    <div style="background: linear-gradient(135deg, #f8f9ff, #ffffff); border: 2px solid #e0e6ed; border-radius: 15px; padding: 30px; margin-bottom: 20px;">
+                        <form id="changePortalPasswordForm" style="display: flex; flex-direction: column; gap: 25px;">
+                            <h4 style="font-size: 1.2em; color: #333; margin-bottom: 20px;">Change Portal Password</h4>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="newPortalPassword" placeholder="New Portal Password" required minlength="6">
+                                <button type="button" class="toggle-password" id="toggleNewPortalPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="confirmPortalPassword" placeholder="Confirm Portal Password" required>
+                            </div>
+                            <button type="submit" style="background: linear-gradient(135deg, #fd7e14 0%, #e83e8c 100%); color: white; border: none; padding: 18px 35px; border-radius: 15px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                <i class="fas fa-save"></i>
+                                Update Portal Password
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 20px; border-top: 2px solid #e9ecef;">
+                    <button id="accessPortalBtn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 18px 35px; border-radius: 15px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <i class="fas fa-external-link-alt"></i>
+                        Access Portal
+                    </button>
+                    <button id="devLogoutBtn" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; border: none; padding: 18px 35px; border-radius: 15px; font-size: 16px; font-weight: 600; cursor: cursor; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -862,7 +972,7 @@
         class CombinedPortal {
             constructor() {
                 // Use your render server URL here
-                this.serverUrl = 'https://server-xq4t.onrender.com';
+                this.serverUrl = 'https://your-server-name.onrender.com';
                 this.isAuthenticated = false;
                 this.sessionTimeout = 30 * 60 * 1000; // 30 minutes
                 this.sessionTimer = null;
@@ -877,11 +987,31 @@
                 this.authScreen = document.getElementById('authScreen');
                 this.portalScreen = document.getElementById('portalScreen');
                 
+                // Auth cards
+                this.mainCard = document.getElementById('mainCard');
+                this.developerCard = document.getElementById('developerCard');
+                this.developerDashboard = document.getElementById('developerDashboard');
+                
                 // Auth elements
                 this.portalLoginForm = document.getElementById('portalLoginForm');
                 this.portalPasswordInput = document.getElementById('portalPassword');
                 this.togglePortalPassword = document.getElementById('togglePortalPassword');
                 this.loginBtn = document.getElementById('loginBtn');
+                
+                // Developer elements
+                this.developerLoginBtn = document.getElementById('developerLoginBtn');
+                this.developerLoginForm = document.getElementById('developerLoginForm');
+                this.developerUsernameInput = document.getElementById('developerUsername');
+                this.developerPasswordInput = document.getElementById('developerPassword');
+                this.toggleDeveloperPassword = document.getElementById('toggleDeveloperPassword');
+                this.devLoginBtn = document.getElementById('devLoginBtn');
+                this.backToMainBtn = document.getElementById('backToMainBtn');
+                this.accessPortalBtn = document.getElementById('accessPortalBtn');
+                this.devLogoutBtn = document.getElementById('devLogoutBtn');
+                
+                // Password change form
+                this.changePortalPasswordForm = document.getElementById('changePortalPasswordForm');
+                this.toggleNewPortalPassword = document.getElementById('toggleNewPortalPassword');
                 
                 // Portal elements
                 this.enrollmentInput = document.getElementById('enrollmentInput');
@@ -1040,8 +1170,17 @@
                     return data.valid === true;
                 } catch (error) {
                     console.error('Password validation error:', error);
-                    throw error;
+                    
+                    // Fallback to hardcoded validation if server is unreachable
+                    console.warn('Using fallback password validation');
+                    return this.fallbackPasswordValidation(password);
                 }
+            }
+
+            fallbackPasswordValidation(password) {
+                // Temporary fallback - replace with server validation
+                const validPasswords = ['strangerbot05', 'admin123', 'portal2025'];
+                return validPasswords.includes(password);
             }
 
             saveAuthState() {
@@ -1072,6 +1211,154 @@
                 this.handleLogout();
             }
 
+            async handleDeveloperLogin() {
+                const username = this.developerUsernameInput.value.trim();
+                const password = this.developerPasswordInput.value.trim();
+                
+                if (!username || !password) {
+                    this.showAlert('Please enter both username and password', 'warning');
+                    return;
+                }
+
+                this.setDeveloperLoadingState(true);
+
+                try {
+                    const isValid = await this.validateDeveloperCredentials(username, password);
+                    
+                    if (isValid) {
+                        this.showAlert('Developer access granted!', 'success');
+                        setTimeout(() => {
+                            this.showDeveloperDashboard();
+                        }, 1500);
+                    } else {
+                        this.showAlert('Invalid developer credentials. Access denied.', 'error');
+                        this.developerUsernameInput.value = '';
+                        this.developerPasswordInput.value = '';
+                        this.focusInput(this.developerUsernameInput);
+                    }
+                } catch (error) {
+                    console.error('Developer authentication error:', error);
+                    this.showAlert('Authentication failed. Please try again.', 'error');
+                } finally {
+                    this.setDeveloperLoadingState(false);
+                }
+            }
+
+            async validateDeveloperCredentials(username, password) {
+                try {
+                    const response = await fetch(`${this.serverUrl}/api/validate-developer`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                            username: username, 
+                            password: password 
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data.valid === true;
+                } catch (error) {
+                    console.error('Developer validation error:', error);
+                    
+                    // Fallback to hardcoded validation if server is unreachable
+                    console.warn('Using fallback developer validation');
+                    return username === 'rehaan05' && password === 'sonimess1400';
+                }
+            }
+
+            async handleChangePortalPassword() {
+                const newPassword = document.getElementById('newPortalPassword').value.trim();
+                const confirmPassword = document.getElementById('confirmPortalPassword').value.trim();
+                
+                if (!newPassword || !confirmPassword) {
+                    this.showAlert('Please fill in both password fields', 'warning');
+                    return;
+                }
+
+                if (newPassword.length < 6) {
+                    this.showAlert('Password must be at least 6 characters long', 'warning');
+                    return;
+                }
+
+                if (newPassword !== confirmPassword) {
+                    this.showAlert('Passwords do not match', 'error');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${this.serverUrl}/api/update-credentials`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: 'updatePortalPassword',
+                            currentDeveloperPassword: 'sonimess1400', // In real app, get this from form
+                            newPortalPassword: newPassword
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.showAlert('Portal password updated successfully!', 'success');
+                        document.getElementById('newPortalPassword').value = '';
+                        document.getElementById('confirmPortalPassword').value = '';
+                    } else {
+                        this.showAlert(data.message || 'Failed to update password', 'error');
+                    }
+                } catch (error) {
+                    console.error('Password update error:', error);
+                    this.showAlert('Failed to update password. Please try again.', 'error');
+                }
+            }
+
+            showMainCard() {
+                this.hideAllAuthCards();
+                setTimeout(() => {
+                    this.mainCard.style.display = 'block';
+                    this.focusInput(this.portalPasswordInput);
+                }, 300);
+            }
+
+            showDeveloperLogin() {
+                this.hideAllAuthCards();
+                setTimeout(() => {
+                    this.developerCard.style.display = 'block';
+                    this.focusInput(this.developerUsernameInput);
+                }, 300);
+            }
+
+            showDeveloperDashboard() {
+                this.hideAllAuthCards();
+                setTimeout(() => {
+                    this.developerDashboard.style.display = 'block';
+                }, 300);
+            }
+
+            hideAllAuthCards() {
+                const cards = [this.mainCard, this.developerCard, this.developerDashboard];
+                cards.forEach(card => {
+                    card.style.display = 'none';
+                });
+            }
+
+            accessPortalAsDeveloper() {
+                this.isAuthenticated = true;
+                this.saveAuthState();
+                this.showAlert('Accessing portal with developer privileges...', 'success');
+                setTimeout(() => {
+                    this.showPortal();
+                    this.resetSessionTimer();
+                }, 1500);
+            }
+
             handleLogout() {
                 this.clearAuthState();
                 if (this.sessionTimer) {
@@ -1081,6 +1368,31 @@
                 this.showAlert('Logged out successfully', 'info');
                 this.showAuth();
                 this.clearAllForms();
+            }
+
+            setDeveloperLoadingState(loading) {
+                this.devLoginBtn.disabled = loading;
+                if (loading) {
+                    this.devLoginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+                } else {
+                    this.devLoginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                }
+            }
+
+            showAuth() {
+                this.portalScreen.style.display = 'none';
+                this.authScreen.style.display = 'flex';
+                
+                // Show main card by default
+                this.hideAllAuthCards();
+                setTimeout(() => {
+                    this.mainCard.style.display = 'block';
+                    this.focusInput(this.portalPasswordInput);
+                }, 300);
+                
+                // Reset portal state
+                this.hideIdCard();
+                this.hideMessages();
             }
 
             showPortal() {
