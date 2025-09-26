@@ -1205,12 +1205,6 @@
                 }
             }
 
-            fallbackPasswordValidation(password) {
-                // Temporary fallback - replace with server validation
-                const validPasswords = ['strangerbot05', 'admin123', 'portal2025'];
-                return validPasswords.includes(password);
-            }
-
             saveAuthState() {
                 const authState = {
                     authenticated: true,
