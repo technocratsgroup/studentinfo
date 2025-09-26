@@ -1293,10 +1293,6 @@
                     return data.valid === true;
                 } catch (error) {
                     console.error('Developer validation error:', error);
-                    
-                    // Fallback to hardcoded validation if server is unreachable
-                    console.warn('Using fallback developer validation');
-                    return username === 'rehaan05' && password === 'sonimess1400';
                 }
             }
 
