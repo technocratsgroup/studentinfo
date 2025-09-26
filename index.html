@@ -1356,10 +1356,18 @@
             }
 
             showDeveloperLogin() {
+                console.log('showDeveloperLogin called');
+                console.log('Developer card element:', this.developerCard);
+                
                 this.hideAllAuthCards();
                 setTimeout(() => {
-                    this.developerCard.style.display = 'block';
-                    this.focusInput(this.developerUsernameInput);
+                    if (this.developerCard) {
+                        this.developerCard.style.display = 'block';
+                        console.log('Developer card display set to block');
+                        this.focusInput(this.developerUsernameInput);
+                    } else {
+                        console.error('Developer card not found!');
+                    }
                 }, 300);
             }
 
