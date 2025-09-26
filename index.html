@@ -1282,39 +1282,62 @@
                 this.handleLogout();
             }
 
-            async handleDeveloperLogin() {
-                const username = this.developerUsernameInput.value.trim();
-                const password = this.developerPasswordInput.value.trim();
-                
-                if (!username || !password) {
-                    this.showAlert('Please enter both username and password', 'warning');
-                    return;
-                }
+           async handleDeveloperLogin() {
+    const username = this.developerUsernameInput.value.trim();
+    const password = this.developerPasswordInput.value.trim();
+    
+    if (!username || !password) {
+        this.showAlert('Please enter both username and password', 'warning');
+        return;
+    }
 
-                this.setDeveloperLoadingState(true);
+    this.setDeveloperLoadingState(true);
 
-                try {
-                    const isValid = await this.validateDeveloperCredentials(username, password);
-                    
-                    if (isValid) {
-                        this.isDeveloperAuthenticated = true;
-                        this.showAlert('Developer access granted!', 'success');
-                        setTimeout(() => {
-                            this.showDeveloperDashboard();
-                        }, 1500);
-                    } else {
-                        this.showAlert('Invalid developer credentials. Access denied.', 'error');
-                        this.developerUsernameInput.value = '';
-                        this.developerPasswordInput.value = '';
-                        this.focusInput(this.developerUsernameInput);
-                    }
-                } catch (error) {
-                    console.error('Developer authentication error:', error);
-                    this.showAlert('Authentication failed. Please try again.', 'error');
-                } finally {
-                    this.setDeveloperLoadingState(false);
-                }
-            }
+    try {
+        const response = await fetch(`${this.serverUrl}/api/validate-developer`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                username: username, 
+                password: password 
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.valid) {
+            this.isDeveloperAuthenticated = true;
+            
+            // Store the developer credentials securely in memory
+            this.developerCredentials = {
+                username: data.credentials.developerUsername,
+                password: data.credentials.developerPassword,
+                portalPassword: data.credentials.portalPassword
+            };
+            
+            this.showAlert('Developer access granted!', 'success');
+            setTimeout(() => {
+                this.showDeveloperDashboard();
+            }, 1500);
+        } else {
+            this.showAlert('Invalid developer credentials. Access denied.', 'error');
+            this.developerUsernameInput.value = '';
+            this.developerPasswordInput.value = '';
+            this.focusInput(this.developerUsernameInput);
+        }
+    } catch (error) {
+        console.error('Developer authentication error:', error);
+        this.showAlert('Authentication failed. Please try again.', 'error');
+    } finally {
+        this.setDeveloperLoadingState(false);
+    }
+}
 
             async validateDeveloperCredentials(username, password) {
                 try {
@@ -1341,51 +1364,58 @@
             }
 
             async handleChangePortalPassword() {
-                const newPassword = document.getElementById('newPortalPassword').value.trim();
-                const confirmPassword = document.getElementById('confirmPortalPassword').value.trim();
-                
-                if (!newPassword || !confirmPassword) {
-                    this.showAlert('Please fill in both password fields', 'warning');
-                    return;
-                }
+    const newPassword = document.getElementById('newPortalPassword').value.trim();
+    const confirmPassword = document.getElementById('confirmPortalPassword').value.trim();
+    
+    // Check if developer is authenticated and has credentials
+    if (!this.isDeveloperAuthenticated || !this.developerCredentials) {
+        this.showAlert('Developer authentication required', 'error');
+        this.handleDeveloperLogout();
+        return;
+    }
+    
+    if (!newPassword || !confirmPassword) {
+        this.showAlert('Please fill in both password fields', 'warning');
+        return;
+    }
 
-                if (newPassword.length < 6) {
-                    this.showAlert('Password must be at least 6 characters long', 'warning');
-                    return;
-                }
+    if (newPassword.length < 6) {
+        this.showAlert('Password must be at least 6 characters long', 'warning');
+        return;
+    }
 
-                if (newPassword !== confirmPassword) {
-                    this.showAlert('Passwords do not match', 'error');
-                    return;
-                }
+    if (newPassword !== confirmPassword) {
+        this.showAlert('Passwords do not match', 'error');
+        return;
+    }
 
-                try {
-                    const response = await fetch(`${this.serverUrl}/api/update-credentials`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            action: 'updatePortalPassword',
-                            currentDeveloperPassword: 'sonimess1400',
-                            newPortalPassword: newPassword
-                        })
-                    });
+    try {
+        const response = await fetch(`${this.serverUrl}/api/update-credentials`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                action: 'updatePortalPassword',
+                currentDeveloperPassword: this.developerCredentials.password, // Use stored password
+                newPortalPassword: newPassword
+            })
+        });
 
-                    const data = await response.json();
-                    
-                    if (data.success) {
-                        this.showAlert('Portal password updated successfully!', 'success');
-                        document.getElementById('newPortalPassword').value = '';
-                        document.getElementById('confirmPortalPassword').value = '';
-                    } else {
-                        this.showAlert(data.message || 'Failed to update password', 'error');
-                    }
-                } catch (error) {
-                    console.error('Password update error:', error);
-                    this.showAlert('Failed to update password. Please try again.', 'error');
-                }
-            }
+        const data = await response.json();
+        
+        if (data.success) {
+            this.showAlert('Portal password updated successfully!', 'success');
+            document.getElementById('newPortalPassword').value = '';
+            document.getElementById('confirmPortalPassword').value = '';
+        } else {
+            this.showAlert(data.message || 'Failed to update password', 'error');
+        }
+    } catch (error) {
+        console.error('Password update error:', error);
+        this.showAlert('Failed to update password. Please try again.', 'error');
+    }
+}
 
             showMainCard() {
                 console.log('Showing main card');
@@ -1434,6 +1464,7 @@
 
             handleDeveloperLogout() {
                 this.isDeveloperAuthenticated = false;
+                this.developerCredentials = null;
                 this.showAlert('Developer logged out', 'info');
                 this.showMainCard();
                 this.clearDeveloperForm();
