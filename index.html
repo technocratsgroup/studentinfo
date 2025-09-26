@@ -248,6 +248,28 @@
             box-shadow: none;
         }
 
+        .developer-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .developer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.4);
+        }
+
         /* Portal Screen Styles */
         .portal-screen {
             display: none;
@@ -759,7 +781,7 @@
                     <span style="background: rgba(255, 255, 255, 0.95); padding: 0 20px; color: #6c757d; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;">or</span>
                 </div>
 
-                <button id="developerLoginBtn" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 18px 35px; border-radius: 15px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;">
+                <button id="developerLoginBtn" class="developer-btn">
                     <i class="fas fa-code"></i>
                     Developer Login
                 </button>
@@ -1008,6 +1030,12 @@
                 this.backToMainBtn = document.getElementById('backToMainBtn');
                 this.accessPortalBtn = document.getElementById('accessPortalBtn');
                 this.devLogoutBtn = document.getElementById('devLogoutBtn');
+                
+                // Debug: Check if developer button exists
+                console.log('Developer login button found:', this.developerLoginBtn ? 'Yes' : 'No');
+                if (this.developerLoginBtn) {
+                    console.log('Button element:', this.developerLoginBtn);
+                }
                 
                 // Password change form
                 this.changePortalPasswordForm = document.getElementById('changePortalPasswordForm');
